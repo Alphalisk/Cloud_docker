@@ -141,12 +141,87 @@ echo "✅ VM $VMID is volledig klaar en geconfigureerd op $IP"
 
 ### Opdracht 1
 
-Lesson 1
+#### Lesson 4 - Installeren van docker met Ubuntu
+
+screenshot van acties:
+
+![alt text](Screenshots\Opdracht1\Repositoryinstellen.png)
+
+alle acties in script:
+
+```bash
+#!/bin/bash
+
+IP="10.24.13.140"
+USER="Dockeradmin"
+
+echo "🔧 Docker prerequisites installeren..."
+ssh ${USER}@${IP} << 'EOF'
+sudo apt-get remove -y docker docker-engine docker.io containerd runc
+sudo apt update
+sudo apt install -y \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+EOF
+
+# 6. DNS fix
+echo "🌐 DNS instellen op 1.1.1.1"
+ssh $USER@${IP%/*} "echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf"
+
+echo "🔐 Docker GPG key toevoegen..."
+ssh ${USER}@${IP} << 'EOF'
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor | sudo tee /etc/apt/keyrings/docker.gpg > /dev/null
+EOF
+
+echo "➕ Docker repository toevoegen..."
+ssh ${USER}@${IP} << 'EOF'
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+EOF
+
+echo "📦 Docker installeren..."
+ssh ${USER}@${IP} << 'EOF'
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+EOF
+
+# DNS fixen
+ssh ${USER}@${IP%/*} "echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf > /dev/null"
+
+
+echo "👤 Toevoegen aan docker groep..."
+ssh ${USER}@${IP} << EOF
+sudo usermod -aG docker $USER
+EOF
+
+echo "✅ Docker installatie klaar! Reboot de VM om docker zonder sudo te gebruiken."
+```
+
 
 Docker staat op de VM!
-Ik heb hello world aangevraagd, en die krijg ik terug.
+Ik heb hello world aangevraagd, en die krijg ik terug!
 
 ![alt text](Screenshots\Opdracht1\DockerWerkt.png)
+
+
+#### Lesson 7 - Build Image with DockerFile and create new Container op elk docker instantie op het Proxmox cluster.
+
+
+#### Lesson 8 - Docker Compose install op alle 3 Docker installaties op het Proxmox cluster. 
+
+#### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
+
+#### Lesson Extra - alle swarms via een centrale manager
+
+#### Lesson 10 - "Basic Docker Neworking Command" Zet de commando's in een script en laat het script de commando's een voor een uitvoeren.
+
+
 
 ### Opdracht 2
 
