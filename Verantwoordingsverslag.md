@@ -234,7 +234,12 @@ elke node van het cluster moet een VM + docker + docker compose.
 Momenteel is er alleen een docker op de VM in node1.
 
 Voorbereidende stappen:
-script gebruiken om docker te installeren op de andere 2 nodes.
+- script gebruiken om docker te installeren op de andere 2 nodes.
+
+![alt text](Screenshots\Opdracht1\3dockerservers.png)
+
+- Docker composer installeren
+
 
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
 

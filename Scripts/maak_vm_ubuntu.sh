@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # === Instellingen ===
-VMID=140 # Deze veranderen!
-VMNAME="VMDocker"
+VMID=142 # Deze veranderen!
+VMNAME="VMDocker3" # Deze veranderen!
 CEPHPOOL="vm-storage"
 DISK="vm-${VMID}-disk-0"
 CLOUDIMG_URL="https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
@@ -11,7 +11,7 @@ IMG_RAW="ubuntu.raw"
 IMG_RESIZED="ubuntu-20G.raw"
 MEM=2048
 CORES=2
-IP="10.24.13.140/24"
+IP="10.24.13.142/24" # Deze veranderen!
 GW="10.24.13.1"
 USER="Dockeradmin"
 SSH_PUBKEY_PATH="$HOME/.ssh/id_rsa.pub"
@@ -52,7 +52,7 @@ sudo qm set $VMID \
 
 # 4. Start de VM
 echo "🟢 Start VM $VMID..."
-qm start $VMID
+sudo qm start $VMID
 
 # 5. Wacht tot SSH beschikbaar is
 echo "⏳ Wachten tot SSH werkt op $IP..."
@@ -90,6 +90,12 @@ sudo apt update && sudo apt upgrade -y
 EOF
 
 # herstarten
-sudo qm reboot 140
+sudo qm reboot 142 # Deze veranderen!
+
+# Wacht tot SSH beschikbaar is
+echo "⏳ Wachten tot SSH werkt op $IP..."
+until ssh -o ConnectTimeout=2 -o StrictHostKeyChecking=no -o BatchMode=yes $USER@${IP%/*} 'echo SSH OK' 2>/dev/null; do
+  sleep 3
+done
 
 echo "✅ VM $VMID is volledig klaar en geconfigureerd op $IP"

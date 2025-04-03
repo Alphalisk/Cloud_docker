@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IP="10.24.13.140"
+IP="10.24.13.142" # Deze veranderen!
 USER="Dockeradmin"
 
 echo "🔧 Docker prerequisites installeren..."
@@ -38,6 +38,10 @@ ssh ${USER}@${IP} << 'EOF'
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 EOF
+
+# DNS fixen
+ssh ${USER}@${IP%/*} "echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf > /dev/null"
+
 
 echo "👤 Toevoegen aan docker groep..."
 ssh ${USER}@${IP} << EOF
