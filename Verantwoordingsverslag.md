@@ -203,6 +203,10 @@ EOF
 echo "✅ Docker installatie klaar! Reboot de VM om docker zonder sudo te gebruiken."
 ```
 
+Hier toon ik commando docker ps en docker images.
+
+![alt text](Screenshots\Opdracht1\docker_ps_images.png)
+
 
 Docker staat op de VM!
 Ik heb hello world aangevraagd, en die krijg ik terug!
@@ -212,8 +216,25 @@ Ik heb hello world aangevraagd, en die krijg ik terug!
 
 #### Lesson 7 - Build Image with DockerFile and create new Container op elk docker instantie op het Proxmox cluster.
 
+Dockerfile maken:
+![alt text](Screenshots\Opdracht1\Dockerfilemaken.sh.png)
+
+Builden van Dockerfile:
+![alt text](Screenshots\Opdracht1\buildDockerfile.png)
+
+Runnen van de build.
+![alt text](Screenshots\Opdracht1\Dockerrunnen.png)
+
+Les 7 afgerond!
 
 #### Lesson 8 - Docker Compose install op alle 3 Docker installaties op het Proxmox cluster. 
+
+Opdracht:
+elke node van het cluster moet een VM + docker + docker compose.
+Momenteel is er alleen een docker op de VM in node1.
+
+Voorbereidende stappen:
+script gebruiken om docker te installeren op de andere 2 nodes.
 
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
 
