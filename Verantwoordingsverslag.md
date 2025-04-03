@@ -240,6 +240,21 @@ Voorbereidende stappen:
 
 - Docker composer installeren
 
+Blijkt al geinstalleerd te zijn!
+
+![alt text](Screenshots\Opdracht1\docker_composer.png)
+
+stappen om een docker_compose.yml te maken:
+
+![alt text](Screenshots\Opdracht1\composeyml.png)
+
+docker compose up werkt:
+
+![alt text](Screenshots\Opdracht1\compose_up.png)
+
+- Tailgate erop zetten zodat server bereikbaar is
+
+![alt text](Screenshots\Opdracht1\tailscalewerkend.png)
 
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
 
