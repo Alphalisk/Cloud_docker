@@ -40,3 +40,9 @@ handeling vast in je eigen repository. Voeg een Markdown file toe waarin je een 
 screen recording van de uitkomsten (werking van reverse proxy en scaling/load balancing).
 
 ### Opdracht 1
+
+
+### Opdracht 2
+
+
+### Opdracht 3
