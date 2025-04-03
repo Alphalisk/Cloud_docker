@@ -258,7 +258,26 @@ docker compose up werkt:
 
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
 
-#### Lesson Extra - alle swarms via een centrale manager
+- Manager gemaakt op pve02
+- firewall geopend voor swarm op alle nodes en docker VM's:
+```bash
+sudo ufw allow 2377/tcp
+sudo ufw allow 7946/tcp
+sudo ufw allow 7946/udp
+sudo ufw allow 4789/udp
+```
+- Worker gemaakt met gekregen code:
+
+![alt text](Screenshots\Opdracht1\Worker node.png)
+
+- Lijst met centrale manager en worker nodes:
+
+![alt text](Screenshots\Opdracht1\swarmlijst.png)
+
+Hierbij de automaat die meteen op alle swarms uitgevoerd wordt met een service.
+- service gemaakt over de swarm
+
+![alt text](Screenshots\Opdracht1\swarmservice.png)
 
 #### Lesson 10 - "Basic Docker Neworking Command" Zet de commando's in een script en laat het script de commando's een voor een uitvoeren.
 
