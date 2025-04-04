@@ -633,5 +633,14 @@ docker run -d \
 ![alt text](Screenshots\Opdracht2\container_gemaakt.png)
 
 
+#### Testen connectie binnen Docker VM
+
+![alt text](Screenshots\Opdracht2\pingen_vanaf_VM.png)
+
+#### Testen connectie binnen cluster buiten docker VM
+
+Via de telnet is de connectie gelukt om te connecten met de container!
+
+![alt text](Screenshots\Opdracht2\telnet_connect_buiten_VM.png)
 
 ### Opdracht 3
