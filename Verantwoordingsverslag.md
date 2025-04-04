@@ -282,6 +282,176 @@ Hierbij de automaat die meteen op alle swarms uitgevoerd wordt met een service.
 #### Lesson 10 - "Basic Docker Neworking Command" Zet de commando's in een script en laat het script de commando's een voor een uitvoeren.
 
 
+```bash
+Dockeradmin@VMDocker:~$ # Configuratie
+NETWORK_NAME="multi-host-network"
+SUBNET="10.10.36.0/24"
+GATEWAY="10.10.36.1"
+CONTAINER1="test-container-1"
+CONTAINER2="test-container-2"
+IP1="10.10.36.101"
+IP2="10.10.36.102"
+Dockeradmin@VMDocker:~$ # 1. Maak een custom bridge netwerk aan
+echo "🌐 Netwerk aanmaken..."
+docker network create \
+  --driver bridge \
+  --subnet=$SUBNET \
+  --gateway=$GATEWAY \
+  $NETWORK_NAME
+🌐 Netwerk aanmaken...
+a1dcc802d773ced575edf3c75507e864be6874bfdb4ece7c870262a772920135
+Dockeradmin@VMDocker:~$ # 2. Start eerste container met statisch IP-adres
+echo "🚀 Start $CONTAINER1 met IP $IP1"
+docker run -dit --name $CONTAINER1 --network $NETWORK_NAME --ip $IP1 alpine:latest sh
+🚀 Start test-container-1 met IP 10.10.36.101
+a5aaf1ebfc5714038675696767a439a9d3483cfffe30231282be5ada051f0798
+Dockeradmin@VMDocker:~$ # 3. Start tweede container met statisch IP-adres
+echo "🚀 Start $CONTAINER2 met IP $IP2"
+docker run -dit --name $CONTAINER2 --network $NETWORK_NAME --ip $IP2 alpine:latest sh
+🚀 Start test-container-2 met IP 10.10.36.102
+c6f69be0980ae2bda166fe5b68a5c6d58c9ddea7251b5b7d3029712abb36a9da
+Dockeradmin@VMDocker:~$ # 4. Test netwerkconnectie (vanuit container 1 naar container 2)
+echo "📡 Test netwerkverbinding van $CONTAINER1 naar $CONTAINER2 ($IP2)"
+docker exec $CONTAINER1 ping -c 4 $IP2
+📡 Test netwerkverbinding van test-container-1 naar test-container-2 (10.10.36.102)
+PING 10.10.36.102 (10.10.36.102): 56 data bytes
+64 bytes from 10.10.36.102: seq=0 ttl=64 time=0.258 ms
+64 bytes from 10.10.36.102: seq=1 ttl=64 time=0.127 ms
+64 bytes from 10.10.36.102: seq=2 ttl=64 time=0.129 ms
+64 bytes from 10.10.36.102: seq=3 ttl=64 time=0.149 ms
+
+--- 10.10.36.102 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.127/0.165/0.258 ms
+Dockeradmin@VMDocker:~$ # 5. Laat netwerkinfo zien
+echo "📋 Docker netwerken:"
+docker network ls
+docker network inspect $NETWORK_NAME
+📋 Docker netwerken:
+NETWORK ID     NAME                 DRIVER    SCOPE
+ced08265645a   bridge               bridge    local
+b9aceaf9dcc5   docker_gwbridge      bridge    local
+415fa37c2337   host                 host      local
+yszsqrb7qhy4   ingress              overlay   swarm
+a1dcc802d773   multi-host-network   bridge    local
+373591a4a3e6   none                 null      local
+[
+    {
+        "Name": "multi-host-network",
+        "Id": "a1dcc802d773ced575edf3c75507e864be6874bfdb4ece7c870262a772920135",
+        "Created": "2025-04-04T09:04:50.692594791Z",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "10.10.36.0/24",
+                    "Gateway": "10.10.36.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "a5aaf1ebfc5714038675696767a439a9d3483cfffe30231282be5ada051f0798": {
+                "Name": "test-container-1",
+                "EndpointID": "7ea15f7962d2b2136a4bc550315dae4fee8fba4a3ed9aa4c0fe8bfdd649f6868",
+                "MacAddress": "22:67:1a:ee:74:9a",
+                "IPv4Address": "10.10.36.101/24",
+                "IPv6Address": ""
+            },
+            "c6f69be0980ae2bda166fe5b68a5c6d58c9ddea7251b5b7d3029712abb36a9da": {
+                "Name": "test-container-2",
+                "EndpointID": "ae9a3727775e48861bfff3d963645fd09e661448041803c5bfa02737f9098255",
+                "MacAddress": "66:19:d9:c5:ee:77",
+                "IPv4Address": "10.10.36.102/24",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+Dockeradmin@VMDocker:~$ # Extra: verbind container1 opnieuw en voeg aliassen toe
+echo "🔗 Voeg aliassen toe aan $CONTAINER1"
+docker network disconnect $NETWORK_NAME $CONTAINER1
+docker network connect --alias db --alias mysql $NETWORK_NAME $CONTAINER1
+🔗 Voeg aliassen toe aan test-container-1
+Dockeradmin@VMDocker:~$ # Extra: Verwijder verbinding container1
+echo "❌ Verbreek verbinding van $CONTAINER1 met netwerk"
+docker network disconnect $NETWORK_NAME $CONTAINER1
+❌ Verbreek verbinding van test-container-1 met netwerk
+```
+
+De CLI commando's waren succesvol. Vervolgens is er een script gemaakt om alles in een flow te laten gebeuren:
+
+```bash
+#!/bin/bash
+
+# Configuratie
+NETWORK_NAME="multi-host-network"
+SUBNET="10.10.36.0/24"
+GATEWAY="10.10.36.1"
+CONTAINER1="test-container-1"
+CONTAINER2="test-container-2"
+IP1="10.10.36.101"
+IP2="10.10.36.102"
+
+# 1. Maak een custom bridge netwerk aan
+echo "🌐 Netwerk 'multi-host-netwerk' aanmaken..."
+docker network create \
+  --driver bridge \
+  --subnet=$SUBNET \
+  --gateway=$GATEWAY \
+  $NETWORK_NAME
+
+# 2. Start eerste container met statisch IP-adres
+echo "🚀 Start $CONTAINER1 met IP $IP1"
+docker run -dit --name $CONTAINER1 --network $NETWORK_NAME --ip $IP1 alpine:latest sh
+
+# 3. Start tweede container met statisch IP-adres
+echo "🚀 Start $CONTAINER2 met IP $IP2"
+docker run -dit --name $CONTAINER2 --network $NETWORK_NAME --ip $IP2 alpine:latest sh
+
+# 4. Test netwerkconnectie (vanuit container 1 naar container 2)
+echo "📡 Test netwerkverbinding van $CONTAINER1 naar $CONTAINER2 ($IP2)"
+docker exec $CONTAINER1 ping -c 4 $IP2
+
+# 5. Laat netwerkinfo zien
+echo "📋 Docker netwerken laten zien, hierin zit een mukti-host-netwerk!"
+docker network ls
+docker network inspect $NETWORK_NAME
+
+# 6 verbind container1 opnieuw en voeg aliassen toe
+echo "🔗 Voeg aliassen toe aan $CONTAINER1"
+docker network disconnect $NETWORK_NAME $CONTAINER1
+docker network connect --alias db --alias mysql $NETWORK_NAME $CONTAINER1
+
+# 6 disconnect de containers, verwijder containers en verwijder netwerk
+echo "Disconnect en verwijder netwerk 'multi-host-netwerk'"
+docker network disconnect multi-host-network test-container-2
+docker rm -f $CONTAINER1 $CONTAINER2
+docker network rm $NETWORK_NAME
+docker network prune -f
+
+# 7 controle dat alles verwijdert is.
+echo "Laat zien dat het multi-host-netwerk niet meer zichtbaar is: (er is geen multi-host-netwerk meer)"
+docker network ls
+docker network inspect $NETWORK_NAME
+
+echo "✅ Setup voltooid!"
+```
+
+Hiervan is een film gemaakt: `Les10-netwerk_docker_script.mp4` toegevoegd als bijlage buiten GitHub.
 
 ### Opdracht 2
 
