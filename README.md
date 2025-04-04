@@ -20,9 +20,9 @@ Inventaris:
 **VM Docker adressen**
 |nodenaam|bevat VM  |IP VM intern   |IP tailscale |
 |--------|----------|---------------|-------------|
-|pve00   |VMDocker3 |10.24.13.142   |100.100.51.67|
-|pve01   |VMDocker2 |10.24.13.141   |             |
-|pve02   |VMDocker  |10.24.13.140   |             |
+|pve00   |VMDocker3 |10.24.13.142   |100.71.128.34|
+|pve01   |VMDocker2 |10.24.13.141   ||
+|pve02   |VMDocker  |10.24.13.140   |100.100.51.67|
 
 ## inloginstructies
 

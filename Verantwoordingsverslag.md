@@ -795,7 +795,7 @@ De tutorial die gevolg heb:
 https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-in-docker-container-28c445ecdeb5
 
 1) Start een Ubuntu container met poortkoppeling
-`docker run -it -p 8080:80 ubuntu`
+`docker run -it -p 8081:80 ubuntu`
 
 ![alt text](Screenshots\Opdracht3\container_met_ubuntu.png)
 
@@ -809,7 +809,6 @@ apt-get install -y curl
 curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh
 bash nodesource_setup.sh
 apt-get install -y nodejs
-npm install -g pm2
 ```
 
 tussenstap, nodejs install:
@@ -876,5 +875,69 @@ alle servers ingesteld:
 ![alt text](Screenshots\Opdracht3\alle_servers_klaar.png)
 
 
+4) Start de servers met pm2
+```bash
+pm2 start /servers/server1/app1.js
+pm2 start /servers/server2/app2.js
+pm2 start /servers/server3/app3.js
+pm2 list
+```
 
+
+![alt text](Screenshots\Opdracht3\pm2_start_server.png)
+
+
+5)  Configureer NGINX als load balancer
+
+```bash
+rm /etc/nginx/nginx.conf
+touch /etc/nginx/nginx.conf
+vim /etc/nginx/nginx.conf
+```
+
+```vim
+events{}
+
+http {
+    upstream servers {
+        server localhost:3001;
+        server localhost:3002;
+        server localhost:3003;
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://servers;
+        }
+    }
+}
+```
+
+ingesteld:
+
+![alt text](Screenshots\Opdracht3\load_balancer_ingesteld.png)
+
+```bash
+nginx -t
+nginx # nginx moet expliciet gestart worden.
+nginx -s reload
+```
+
+6) Test de Load Balancer
+
+browse:
+http://localhost:8081/
+
+result:
+response from server 1
+response from server 2
+response from server 3
+
+Test uitgevoerd:
+
+![alt text](Screenshots\Opdracht3\round_robin_nginx.png)
+
+Er is ook een video `round_robin_load_balance.mp3` die de round robin aantoont.
 
