@@ -643,4 +643,78 @@ Via de telnet is de connectie gelukt om te connecten met de container!
 
 ![alt text](Screenshots\Opdracht2\telnet_connect_buiten_VM.png)
 
+#### Testen connectie met andere SQL binnen SQL in de container
+Ook binnen de sql applicaties probeer ik elkaar te bereiken.
+
+```bash
+docker exec -it mysql1 bash
+mysql -uroot -psecret --host=10.10.9.10
+
+quit
+mysql -uroot -psecret --host=10.10.9.10
+```
+
+Dit werkt:
+
+![alt text](Screenshots\Opdracht2\connectie_tussen_SQL.png)
+
+Het is dus gelukt om intern, alsook buiten de VM (met docker) om vanuit het eigen subnet contact te maken met de container.
+
+
+
+#### Scripten van 2 subnetten met 2 containers met SQL
+
+opgeslagen in file Opdracht2_subnetten_docker.sh
+
+```bash
+#!/bin/bash
+SUBNET1="10.10.8.0/24"
+SUBNET2="10.10.9.0/24"
+NET1="mysql_net_1"
+NET2="mysql_net_2"
+CONTAINER1="mysql1"
+CONTAINER2="mysql2"
+CONTAINER1_IP="10.10.8.10"
+CONTAINER2_IP="10.10.9.10"
+
+# aanmaken subnet 1
+docker network create \
+  --driver bridge \
+  --subnet $SUBNET1 \
+  $NET1
+
+# aanmaken subnet 2
+docker network create \
+  --driver bridge \
+  --subnet $SUBNET2 \
+  $NET2
+
+# aanmaken container1 met SQL in subnet 1
+docker run -d \
+  --name $CONTAINER1 \
+  --network $NET1 \
+  --ip $CONTAINER1_IP \
+  -p 3307:3306 \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  mysql:5.7
+
+# aanmaken container2 met SQL in subnet 2
+docker run -d \
+  --name $CONTAINER2 \
+  --network $NET2 \
+  --ip $CONTAINER2_IP \
+  -p 3308:3306 \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  mysql:5.7
+```
+
+Uitvoerbaar maken en aftrappen:
+```bash
+chmod u+x Opdracht2_subnetten_docker.sh
+./Opdracht2_subnetten_docker.sh
+```
+
+#### Beschrijving waarom deze subnetten handig zijn
+
+
 ### Opdracht 3
