@@ -3,9 +3,12 @@ Repository voor opdrachten Cloud Computing - Docker.
 
 Inventaris:
 - Het verantwoordingsverslag voor de opdrachten wordt in het bestand *Verantwoordingsverslag.md* bijgehouden.
-- De map screenhots bevat bewijsvoering
+- De map Screenhots bevat bewijsvoering
 - De map Scripts bevat bash scripts
 - De map Opdrachtbeschrijving is de daadwerkelijke opdracht
+- De map `CLI commado's` bevat files met CLI commando's die gebruikt zijn, maar niet een script zijn om te runnen.
+- De yml files zijn gebruikt voor de docker lessons.
+- Opgenomen video's staan niet op Github vanwege de grootte. Deze worden apart geleverd.
 
 **Netwerkconfiguratie:**
 |nodenaam|IP node intern |Type node    |IP Tailscale  |
@@ -21,7 +24,11 @@ Inventaris:
 |pve01   |VMDocker2 |10.24.13.141   |             |
 |pve02   |VMDocker  |10.24.13.140   |             |
 
-## Werkwijze aanmaken LXM container voor wordpress, klant 1
+## inloginstructies
 
-- inloggen op container:
-  `ssh Dockeradmin@10.24.13.<VM-IP>`
+- inloggen op control node (moet private key certificaat op computer hebben):
+  `ssh root@100.94.185.45`
+- inloggen op managed node:
+  `ssh beheerder@pve01` of `ssh beheerder@pve02`
+- inloggen op VMDocker:
+  `ssh Dockeradmin@<VMDocker-IP>`
