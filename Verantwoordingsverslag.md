@@ -799,8 +799,9 @@ https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-i
 
 ![alt text](Screenshots\Opdracht3\container_met_ubuntu.png)
 
-2) Installeer NGINX
+2) Installeer NGINX en vim
 `apt-get install nginx -y`
+`apt-get install vim -y`
 
 3) Installeer Node.js + pm2
 ```bash
@@ -817,4 +818,63 @@ tussenstap, nodejs install:
 
 tussenstap, pm2 install:
 
-![alt text](image-1.png)
+![alt text](Screenshots\Opdracht3\pm2_install.png)
+
+3) Maak 3 mappen en bestanden met servers aan
+
+```bash
+cd /
+mkdir servers
+cd servers
+mkdir server1 server2 server3
+
+# server 1
+cd /servers/server1
+npm init -y
+npm i express
+vim app1.js
+
+# server 2
+cd /servers/server2
+npm init -y
+npm i express
+vim app2.js
+
+# server 3
+cd /servers/server3
+npm init -y
+npm i express
+vim app3.js
+```
+
+Daarna in app1.js/app2.js en app3.js:
+
+```vim
+# app1.js
+const express = require("express");
+const app = express();
+app.get("/", (req, res)=>{ res.send("response from server 1"); });
+app.listen(3001, ()=>{ console.log("App running on port 3001"); });
+
+# app2.js
+const express = require("express");
+const app = express();
+app.get("/", (req, res)=>{ res.send("response from server 2"); });
+app.listen(3002, ()=>{ console.log("App running on port 3002"); });
+
+# app3.js
+const express = require("express");
+const app = express();
+app.get("/", (req, res)=>{ res.send("response from server 3"); });
+app.listen(3003, ()=>{ console.log("App running on port 3003"); });
+```
+
+eerste server ingesteld:
+![alt text](Screenshots\Opdracht3\klaarzettenserver1.png)
+
+alle servers ingesteld:
+![alt text](Screenshots\Opdracht3\alle_servers_klaar.png)
+
+
+
+
