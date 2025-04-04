@@ -791,3 +791,8 @@ Traefik is een moderne reverse proxy die automatisch Docker containers detecteer
 
 #### Opdracht 3.2 Load Balancing
 
+De tutorial die gevolg heb:
+https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-in-docker-container-28c445ecdeb5
+
+1) Stap 1: Start een Ubuntu container met poortkoppeling
+
