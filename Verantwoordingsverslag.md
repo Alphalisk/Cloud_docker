@@ -794,5 +794,27 @@ Traefik is een moderne reverse proxy die automatisch Docker containers detecteer
 De tutorial die gevolg heb:
 https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-in-docker-container-28c445ecdeb5
 
-1) Stap 1: Start een Ubuntu container met poortkoppeling
+1) Start een Ubuntu container met poortkoppeling
+`docker run -it -p 8080:80 ubuntu`
 
+![alt text](Screenshots\Opdracht3\container_met_ubuntu.png)
+
+2) Installeer NGINX
+`apt-get install nginx -y`
+
+3) Installeer Node.js + pm2
+```bash
+apt-get install -y curl
+curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh
+bash nodesource_setup.sh
+apt-get install -y nodejs
+npm install -g pm2
+```
+
+tussenstap, nodejs install:
+
+![alt text](Screenshots\Opdracht3\nodejs_install.png)
+
+tussenstap, pm2 install:
+
+![alt text](image-1.png)
