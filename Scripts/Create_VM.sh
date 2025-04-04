@@ -23,5 +23,3 @@ sudo qm set 300 --ciuser wpadmin --cipassword securepass --ipconfig0 ip=10.24.13
 
 # echo "🚀 Start VM"
 qm start $VMID
-
-# SSH verbinding via certificaat
