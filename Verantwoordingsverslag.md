@@ -256,6 +256,121 @@ docker compose up werkt:
 
 ![alt text](Screenshots\Opdracht1\tailscalewerkend.png)
 
+Vervolgens de docker_compose.yml maken:
+
+```yml
+version: "4.2"
+
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: todos
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - todo-app
+
+  app:
+    image: node:12-alpine
+    command: sh -c "yarn install && yarn run dev"
+    ports:
+      - 3000:3000
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_DB: todos
+    depends_on:
+      - mysql
+    networks:
+      - todo-app
+
+volumes:
+  mysql-data:
+
+networks:
+  todo-app:
+```
+
+Nog eens installeren docker_compose, het ging niet helemaal goed
+
+```bash
+Dockeradmin@VMDocker:~$ VERSION=1.29.2
+Dockeradmin@VMDocker:~$ sudo curl -L "https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m)" \
+  -o /usr/local/bin/docker-compose
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0^C
+Dockeradmin@VMDocker:~$ echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf
+nameserver 1.1.1.1
+Dockeradmin@VMDocker:~$ sudo curl -L "https://github.com/docker/compose/releases/download/${VERSION}/docker-compose-$(uname -s)-$(uname -m)"   -o /usr/local/bin/docker-compose
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 12.1M  100 12.1M    0     0  10.4M      0  0:00:01  0:00:01 --:--:-- 43.7M
+Dockeradmin@VMDocker:~$ sudo chmod +x /usr/local/bin/docker-compose
+Dockeradmin@VMDocker:~$ docker-compose --version
+docker-compose version 1.29.2, build unknown
+Dockeradmin@VMDocker:~$ 
+```
+
+![alt text](Screenshots\Opdracht1\docker_compose_sql.png)
+
+Internet deed het niet goed, hierbij ook gefixed:
+
+```bash
+Dockeradmin@VMDocker:~/todo-app$ sudo nano /etc/docker/daemon.json
+Dockeradmin@VMDocker:~/todo-app$ sudo systemctl restart docker
+Dockeradmin@VMDocker:~/todo-app$ docker-compose down
+docker-compose up -d
+Stopping todo-app_mysql_1 ... done
+Removing todo-app_app_1   ... done                                                                                                                                               
+Removing todo-app_mysql_1 ... done                                                                                                                                               
+Removing network todo-app_todo-app
+WARNING: The Docker Engine you're using is running in swarm mode.
+
+Compose does not use swarm mode to deploy services to multiple nodes in a swarm. All containers will be scheduled on the current node.
+
+To deploy your application across the swarm, use `docker stack deploy`.
+
+Creating network "todo-app_todo-app" with the default driver
+Creating todo-app_mysql_1 ... done
+Creating todo-app_app_1   ... done
+Dockeradmin@VMDocker:~/todo-app$ docker-compose logs -f app
+Attaching to todo-app_app_1
+app_1    | yarn install v1.22.18
+app_1    | warning package.json: No license field
+app_1    | warning todo-app@1.0.0: No license field
+app_1    | [1/4] Resolving packages...
+app_1    | [2/4] Fetching packages...
+app_1    | [3/4] Linking dependencies...
+app_1    | [4/4] Building fresh packages...
+app_1    | success Saved lockfile.
+app_1    | Done in 3.95s.
+app_1    | yarn run v1.22.18
+app_1    | warning package.json: No license field
+app_1    | $ node index.js
+app_1    | ✅ App luistert op http://localhost:3000
+
+```
+
+laatste commando's:
+
+```bash
+docker-compose up -d
+docker-compose logs -f app
+```
+
+
+![alt text](Screenshots\Opdracht1\Docker_compose_werkt.png)
+
+
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
 
 - Manager gemaakt op pve02
