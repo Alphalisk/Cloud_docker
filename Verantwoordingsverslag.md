@@ -766,6 +766,27 @@ screenshot:
 
 ![alt text](Screenshots\Opdracht3\reverse_proxy_rawdata.png)
 
+whoami aangemaakt:
 
 ![alt text](Screenshots\Opdracht3\whoami.png)
+
+Curl commando:
+
+![alt text](Screenshots\Opdracht3\curlcommando.png)
+
+Nog een instantie van whoami gemaakt. De curl commando laat nu verschillende resultaten zien:
+
+![alt text](Screenshots\Opdracht3\curl2instantieswhoami.png)
+
+**Uitleg wat een reverse proxy doet**
+
+Een reverse proxy ontvangt inkomend verkeer van clients en stuurt dit door naar de juiste backend-service. In plaats van dat de client rechtstreeks communiceert met de backend, communiceert deze met de reverse proxy. Dit biedt voordelen zoals:
+
+- Load balancing (verkeer verdelen over meerdere servers)
+- SSL termination (HTTPS afhandeling op de proxy)
+- Routing o.b.v. domein of pad
+- Verbergen van interne netwerken/services
+
+Traefik is een moderne reverse proxy die automatisch Docker containers detecteert en routes aanmaakt.
+
 #### Opdracht 3.2 Load Balancing
