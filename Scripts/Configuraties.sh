@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # 🌐 2. 🛠️ DNS fixen naar 1.1.1.1
 ssh wpadmin@10.24.13.300 "echo 'nameserver 1.1.1.1' | sudo tee /etc/resolv.conf"
 

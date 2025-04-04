@@ -568,15 +568,19 @@ echo "✅ Setup voltooid!"
 
 Hiervan is een film gemaakt: `Les10-netwerk_docker_script.mp4` toegevoegd als bijlage buiten GitHub.
 
+---
+
 ### Opdracht 2
 
 
 #### Concrete opdracht:
-> Bekijk de volgende YouTube video : Docker networking is crazy (https://www.youtube.com/watch?v=bKFMS5C4CG0). Zet twee MySQL ( 
+
+Opdracht 2:
+- Bekijk de volgende YouTube video : Docker networking is crazy (https://www.youtube.com/watch?v=bKFMS5C4CG0). Zet twee MySQL ( 
 lesson8 van opdracht 1) Zet elke server in een apart subnet. Controleer of je vanuit jouw eigen subnet (waar ook de Proxmox nodes opstaan), 
 je de MySQL containers kunt benaderen en of de servers elkaar kunnen benaderen. Mocht dat niet lukken pas dan de setting aan zodat wel 
 kan,  script deze. Maak een korte beschrijving hoe je meerdere subnetten kunt creëren met Docker en waarom dit nuttig kan zijn.  Plaats 
-deze ook op je repository
+deze ook op je repository.
 
 #### Stap 1: Maak twee bridge-netwerken aan met eigen subnetten
 
@@ -739,3 +743,29 @@ Door meerdere subnetten aan te maken, kun je eenvoudig testscenario’s nabootse
 Docker ondersteunt containers die in meerdere netwerken tegelijk zitten. Zo kun je bijvoorbeeld een MySQL-database zowel in een intern netwerk (voor backend) als een extern netwerk (voor monitoring) plaatsen.
 
 ### Opdracht 3
+
+Opdracht 3:
+- Opdrachten:  Load Balancing en Reverse Proxy:
+1) (2pt) Maak kennis met een product dat bovenstaande verzorgt:
+https://doc.traefik.io/traefik/getting-started/quick-start/
+Maak screenshots van de uitkomsten van bovenstaande en leg uit wat een Reverse proxy doet
+1) (4pt) Kies een tutorial waarin men in Docker een load balancer/proxy toepast. Met behulp van Nginx. Volg de tutorial en leg per stap je 
+handeling vast in je eigen repository. Voeg een Markdown file toe waarin je een verwijzing maakt naar de gevolgde tutorial. Maak een korte 
+screen recording van de uitkomsten (werking van reverse proxy en scaling/load balancing).
+
+#### Opdracht 3.1 Reverse Proxy
+
+create official Traefik image screenshot:
+
+![alt text](Screenshots\Opdracht3\docker_compose.png)
+
+`docker compose up -d reverse proxy`
+`http://localhost:8080/api/rawdata`
+
+screenshot: 
+
+![alt text](Screenshots\Opdracht3\reverse_proxy_rawdata.png)
+
+
+
+#### Opdracht 3.2 Load Balancing

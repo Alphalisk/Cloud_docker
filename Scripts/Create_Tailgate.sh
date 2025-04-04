@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # === Config ===
-VM_IP="10.24.13.141" # Dit aanpassen
+VM_IP="10.24.13.142" # Dit aanpassen
 SSH_USER="Dockeradmin" # Dit aanpassen
 TAILSCALE_ENV="/tmp/tailscale.env"
-VM_HOSTNAME="VMDocker2" # Dit aanpassen
+VM_HOSTNAME="VMDocker3" # Dit aanpassen
 
 # 🔑 SSH toegang check
 echo "📤 Kopieer Tailscale config naar VM..."

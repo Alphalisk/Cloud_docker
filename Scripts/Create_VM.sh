@@ -1,3 +1,4 @@
+#!/bin/bash
 # VM container
 
 ## VM 300 aanmaken op Ceph storage (vm-storage)
