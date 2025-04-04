@@ -767,5 +767,5 @@ screenshot:
 ![alt text](Screenshots\Opdracht3\reverse_proxy_rawdata.png)
 
 
-
+![alt text](Screenshots\Opdracht3\whoami.png)
 #### Opdracht 3.2 Load Balancing
