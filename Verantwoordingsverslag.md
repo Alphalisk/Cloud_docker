@@ -660,8 +660,6 @@ Dit werkt:
 
 Het is dus gelukt om intern, alsook buiten de VM (met docker) om vanuit het eigen subnet contact te maken met de container.
 
-
-
 #### Scripten van 2 subnetten met 2 containers met SQL
 
 opgeslagen in file Opdracht2_subnetten_docker.sh
@@ -716,5 +714,28 @@ chmod u+x Opdracht2_subnetten_docker.sh
 
 #### Beschrijving waarom deze subnetten handig zijn
 
+In Docker kun je eenvoudig meerdere netwerken aanmaken met hun eigen subnetten en gateways. Deze netwerken zijn volledig van elkaar geïsoleerd — tenzij je expliciet containers met elkaar verbindt.
+
+Voordelen van meerdere subnetten:
+1. Isolatie van services  
+Je kunt containers scheiden per omgeving of per functie:
+Bijvoorbeeld: een dev-netwerk voor ontwikkelcontainers
+En een prod-netwerk voor live containers
+Of: frontend en backend in aparte netwerken
+Zo beperk je onbedoelde communicatie tussen containers.
+
+2. Verbeterde beveiliging  
+Bridge-netwerken zijn standaard niet verbonden met elkaar. Alleen containers binnen hetzelfde netwerk kunnen met elkaar praten.
+Je kunt dus bewust selectief toegang geven, door bijvoorbeeld alleen bepaalde containers in meerdere netwerken te plaatsen via:
+`docker network connect <netwerk> <container>`
+
+3. Simulatie van complexe netwerkomgevingen  
+Door meerdere subnetten aan te maken, kun je eenvoudig testscenario’s nabootsen zoals:
+- Meerdere netwerken (bijv. LAN)
+- Externe services
+- Firewall-regels testen tussen netwerken  
+
+4. Multi-homed containers  
+Docker ondersteunt containers die in meerdere netwerken tegelijk zitten. Zo kun je bijvoorbeeld een MySQL-database zowel in een intern netwerk (voor backend) als een extern netwerk (voor monitoring) plaatsen.
 
 ### Opdracht 3
