@@ -571,4 +571,67 @@ Hiervan is een film gemaakt: `Les10-netwerk_docker_script.mp4` toegevoegd als bi
 ### Opdracht 2
 
 
+#### Concrete opdracht:
+> Bekijk de volgende YouTube video : Docker networking is crazy (https://www.youtube.com/watch?v=bKFMS5C4CG0). Zet twee MySQL ( 
+lesson8 van opdracht 1) Zet elke server in een apart subnet. Controleer of je vanuit jouw eigen subnet (waar ook de Proxmox nodes opstaan), 
+je de MySQL containers kunt benaderen en of de servers elkaar kunnen benaderen. Mocht dat niet lukken pas dan de setting aan zodat wel 
+kan,  script deze. Maak een korte beschrijving hoe je meerdere subnetten kunt creëren met Docker en waarom dit nuttig kan zijn.  Plaats 
+deze ook op je repository
+
+#### Stap 1: Maak twee bridge-netwerken aan met eigen subnetten
+
+Configuratie:
+```bash
+#!/bin/bash
+SUBNET1="10.10.8.0/24"
+SUBNET2="10.10.9.0/24"
+NET1="mysql_net_1"
+NET2="mysql_net_2"
+CONTAINER1="mysql1"
+CONTAINER2="mysql2"
+CONTAINER1_IP="10.10.8.10"
+CONTAINER2_IP="10.10.9.10"
+```
+
+De volgende commando wordt uitgevoerd in de docker container:
+
+```bash
+docker network create \
+  --driver bridge \
+  --subnet 10.10.8.0/24 \
+  mysql_net_1
+
+docker network create \
+  --driver bridge \
+  --subnet 10.10.9.0/24 \
+  mysql_net_2
+```
+
+screenshot
+![alt text](Screenshots\Opdracht2\aanmaken_subnet.png)
+
+#### Stap 2: Twee MySQL containers opzetten
+
+```
+docker run -d \
+  --name mysql1 \
+  --network mysql_net_1 \
+  --ip 10.10.8.10 \
+  -p 3307:3306 \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  mysql:5.7
+
+docker run -d \
+  --name mysql2 \
+  --network mysql_net_2 \
+  --ip 10.10.9.10 \
+  -p 3308:3306 \
+  -e MYSQL_ROOT_PASSWORD=secret \
+  mysql:5.7
+```
+
+![alt text](Screenshots\Opdracht2\container_gemaakt.png)
+
+
+
 ### Opdracht 3
