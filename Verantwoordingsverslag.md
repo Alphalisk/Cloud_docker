@@ -790,3 +790,4 @@ Een reverse proxy ontvangt inkomend verkeer van clients en stuurt dit door naar 
 Traefik is een moderne reverse proxy die automatisch Docker containers detecteert en routes aanmaakt.
 
 #### Opdracht 3.2 Load Balancing
+
