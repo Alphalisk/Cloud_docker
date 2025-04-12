@@ -407,6 +407,7 @@ Hierbij de automaat die meteen op alle swarms uitgevoerd wordt met een service.
 
 #### Lesson 10 - "Basic Docker Neworking Command" Zet de commando's in een script en laat het script de commando's een voor een uitvoeren.
 
+Voordat de automatische script wordt uitgevoerd wordt er eerst geoefend in bash. Hierbij de oefeningen in code:
 
 ```bash
 Dockeradmin@VMDocker:~$ # Configuratie
