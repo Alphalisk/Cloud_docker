@@ -263,7 +263,7 @@ docker compose up werkt:
 
 ![alt text](Screenshots/Opdracht1/tailscalewerkend.png)
 
-Vervolgens de docker_compose.yml maken:
+Vervolgens de docker-compose.yml maken:
 
 ```yml
 version: "4.2"
@@ -305,7 +305,7 @@ networks:
   todo-app:
 ```
 
-Nog eens installeren docker_compose, het ging niet helemaal goed
+Nog eens installeren docker-compose, het ging niet helemaal goed
 
 ```bash
 Dockeradmin@VMDocker:~$ VERSION=1.29.2
