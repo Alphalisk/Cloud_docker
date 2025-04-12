@@ -955,3 +955,6 @@ Test uitgevoerd:
 
 Er is ook een video `round_robin_load_balance.mp3` die de round robin aantoont.
 
+*Gemaakt door: Richard Mank*
+*Studentnummer: 460389*
+*Datum: 12-4-2025*
