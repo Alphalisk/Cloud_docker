@@ -8,7 +8,9 @@ Inventaris:
 - De map Opdrachtbeschrijving is de daadwerkelijke opdracht
 - De map `CLI commando's` bevat files met CLI commando's die gebruikt zijn, maar niet een script zijn om te runnen.
 - De yml files zijn gebruikt voor de docker lessons.
-- Opgenomen video's staan niet op Github vanwege de grootte. Deze worden apart geleverd.
+- Bijgeleverd zijn 2 video's buiten github:
+  - Les10_netwerk_docker_script.mp4
+  - round_robin_load_balance.mp4
 
 **Netwerkconfiguratie:**
 |nodenaam|IP node intern |Type node    |IP Tailscale  |
