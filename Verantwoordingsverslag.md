@@ -392,7 +392,7 @@ sudo ufw allow 4789/udp
 ```
 - Worker gemaakt met gekregen code:
 
-![alt text](Screenshots\Opdracht1\Worker node.png)
+![alt text](Screenshots\Opdracht1\Worker_node.png)
 
 - Lijst met centrale manager en worker nodes:
 
