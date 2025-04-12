@@ -6,7 +6,7 @@ In dit verslag verantwoord ik mijn werkzaamheden binnen het vak **Cloud Computin
 
 ## Opdrachten van het project
 
-![alt text](OpdrachtBeschrijving\Opdracht.png)
+![alt text](OpdrachtBeschrijving/Opdracht.png)
 
 Te doen:
 
@@ -145,7 +145,7 @@ echo "✅ VM $VMID is volledig klaar en geconfigureerd op $IP"
 
 screenshot van acties:
 
-![alt text](Screenshots\Opdracht1\Repositoryinstellen.png)
+![alt text](Screenshots/Opdracht1/Repositoryinstellen.png)
 
 alle acties in script:
 
@@ -205,25 +205,25 @@ echo "✅ Docker installatie klaar! Reboot de VM om docker zonder sudo te gebrui
 
 Hier toon ik commando docker ps en docker images.
 
-![alt text](Screenshots\Opdracht1\docker_ps_images.png)
+![alt text](Screenshots/Opdracht1/docker_ps_images.png)
 
 
 Docker staat op de VM!
 Ik heb hello world aangevraagd, en die krijg ik terug!
 
-![alt text](Screenshots\Opdracht1\DockerWerkt.png)
+![alt text](Screenshots/Opdracht1/DockerWerkt.png)
 
 
 #### Lesson 7 - Build Image with DockerFile and create new Container op elk docker instantie op het Proxmox cluster.
 
 Dockerfile maken:
-![alt text](Screenshots\Opdracht1\Dockerfilemaken.sh.png)
+![alt text](Screenshots/Opdracht1/Dockerfilemaken.sh.png)
 
 Builden van Dockerfile:
-![alt text](Screenshots\Opdracht1\buildDockerfile.png)
+![alt text](Screenshots/Opdracht1/buildDockerfile.png)
 
 Runnen van de build.
-![alt text](Screenshots\Opdracht1\Dockerrunnen.png)
+![alt text](Screenshots/Opdracht1/Dockerrunnen.png)
 
 Les 7 afgerond!
 
@@ -236,25 +236,25 @@ Momenteel is er alleen een docker op de VM in node1.
 Voorbereidende stappen:
 - script gebruiken om docker te installeren op de andere 2 nodes.
 
-![alt text](Screenshots\Opdracht1\3dockerservers.png)
+![alt text](Screenshots/Opdracht1/3dockerservers.png)
 
 - Docker composer installeren
 
 Blijkt al geinstalleerd te zijn!
 
-![alt text](Screenshots\Opdracht1\docker_composer.png)
+![alt text](Screenshots/Opdracht1/docker_composer.png)
 
 stappen om een docker_compose.yml te maken:
 
-![alt text](Screenshots\Opdracht1\composeyml.png)
+![alt text](Screenshots/Opdracht1/composeyml.png)
 
 docker compose up werkt:
 
-![alt text](Screenshots\Opdracht1\compose_up.png)
+![alt text](Screenshots/Opdracht1/compose_up.png)
 
 - Tailgate erop zetten zodat server bereikbaar is
 
-![alt text](Screenshots\Opdracht1\tailscalewerkend.png)
+![alt text](Screenshots/Opdracht1/tailscalewerkend.png)
 
 Vervolgens de docker_compose.yml maken:
 
@@ -320,7 +320,7 @@ docker-compose version 1.29.2, build unknown
 Dockeradmin@VMDocker:~$ 
 ```
 
-![alt text](Screenshots\Opdracht1\docker_compose_sql.png)
+![alt text](Screenshots/Opdracht1/docker_compose_sql.png)
 
 Internet deed het niet goed, hierbij ook gefixed:
 
@@ -368,7 +368,7 @@ docker-compose logs -f app
 ```
 
 
-![alt text](Screenshots\Opdracht1\Docker_compose_werkt.png)
+![alt text](Screenshots/Opdracht1/Docker_compose_werkt.png)
 
 
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
@@ -387,12 +387,12 @@ sudo ufw allow 4789/udp
 
 - Lijst met centrale manager en worker nodes:
 
-![alt text](Screenshots\Opdracht1\swarmlijst.png)
+![alt text](Screenshots/Opdracht1/swarmlijst.png)
 
 Hierbij de automaat die meteen op alle swarms uitgevoerd wordt met een service.
 - service gemaakt over de swarm
 
-![alt text](Screenshots\Opdracht1\swarmservice.png)
+![alt text](Screenshots/Opdracht1/swarmservice.png)
 
 #### Lesson 10 - "Basic Docker Neworking Command" Zet de commando's in een script en laat het script de commando's een voor een uitvoeren.
 
@@ -612,7 +612,7 @@ docker network create \
 ```
 
 screenshot
-![alt text](Screenshots\Opdracht2\aanmaken_subnet.png)
+![alt text](Screenshots/Opdracht2/aanmaken_subnet.png)
 
 #### Stap 2: Twee MySQL containers opzetten
 
@@ -634,18 +634,18 @@ docker run -d \
   mysql:5.7
 ```
 
-![alt text](Screenshots\Opdracht2\container_gemaakt.png)
+![alt text](Screenshots/Opdracht2/container_gemaakt.png)
 
 
 #### Testen connectie binnen Docker VM
 
-![alt text](Screenshots\Opdracht2\pingen_vanaf_VM.png)
+![alt text](Screenshots/Opdracht2/pingen_vanaf_VM.png)
 
 #### Testen connectie binnen cluster buiten docker VM
 
 Via de telnet is de connectie gelukt om te connecten met de container!
 
-![alt text](Screenshots\Opdracht2\telnet_connect_buiten_VM.png)
+![alt text](Screenshots/Opdracht2/telnet_connect_buiten_VM.png)
 
 #### Testen connectie met andere SQL binnen SQL in de container
 Ook binnen de sql applicaties probeer ik elkaar te bereiken.
@@ -660,7 +660,7 @@ mysql -uroot -psecret --host=10.10.9.10
 
 Dit werkt:
 
-![alt text](Screenshots\Opdracht2\connectie_tussen_SQL.png)
+![alt text](Screenshots/Opdracht2/connectie_tussen_SQL.png)
 
 Het is dus gelukt om intern, alsook buiten de VM (met docker) om vanuit het eigen subnet contact te maken met de container.
 
@@ -757,26 +757,26 @@ screen recording van de uitkomsten (werking van reverse proxy en scaling/load ba
 
 create official Traefik image screenshot:
 
-![alt text](Screenshots\Opdracht3\docker_compose.png)
+![alt text](Screenshots/Opdracht3/docker_compose.png)
 
 `docker compose up -d reverse proxy`
 `http://localhost:8080/api/rawdata`
 
 screenshot: 
 
-![alt text](Screenshots\Opdracht3\reverse_proxy_rawdata.png)
+![alt text](Screenshots/Opdracht3/reverse_proxy_rawdata.png)
 
 whoami aangemaakt:
 
-![alt text](Screenshots\Opdracht3\whoami.png)
+![alt text](Screenshots/Opdracht3/whoami.png)
 
 Curl commando:
 
-![alt text](Screenshots\Opdracht3\curlcommando.png)
+![alt text](Screenshots/Opdracht3/curlcommando.png)
 
 Nog een instantie van whoami gemaakt. De curl commando laat nu verschillende resultaten zien:
 
-![alt text](Screenshots\Opdracht3\curl2instantieswhoami.png)
+![alt text](Screenshots/Opdracht3/curl2instantieswhoami.png)
 
 **Uitleg wat een reverse proxy doet**
 
@@ -797,7 +797,7 @@ https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-i
 1) Start een Ubuntu container met poortkoppeling
 `docker run -it -p 8081:80 ubuntu`
 
-![alt text](Screenshots\Opdracht3\container_met_ubuntu.png)
+![alt text](Screenshots/Opdracht3/container_met_ubuntu.png)
 
 2) Installeer NGINX en vim
 `apt-get install nginx -y`
@@ -813,11 +813,11 @@ apt-get install -y nodejs
 
 tussenstap, nodejs install:
 
-![alt text](Screenshots\Opdracht3\nodejs_install.png)
+![alt text](Screenshots/Opdracht3/nodejs_install.png)
 
 tussenstap, pm2 install:
 
-![alt text](Screenshots\Opdracht3\pm2_install.png)
+![alt text](Screenshots/Opdracht3/pm2_install.png)
 
 3) Maak 3 mappen en bestanden met servers aan
 
@@ -869,10 +869,10 @@ app.listen(3003, ()=>{ console.log("App running on port 3003"); });
 ```
 
 eerste server ingesteld:
-![alt text](Screenshots\Opdracht3\klaarzettenserver1.png)
+![alt text](Screenshots/Opdracht3/klaarzettenserver1.png)
 
 alle servers ingesteld:
-![alt text](Screenshots\Opdracht3\alle_servers_klaar.png)
+![alt text](Screenshots/Opdracht3/alle_servers_klaar.png)
 
 
 4) Start de servers met pm2
@@ -884,7 +884,7 @@ pm2 list
 ```
 
 
-![alt text](Screenshots\Opdracht3\pm2_start_server.png)
+![alt text](Screenshots/Opdracht3/pm2_start_server.png)
 
 
 5)  Configureer NGINX als load balancer
@@ -917,7 +917,7 @@ http {
 
 ingesteld:
 
-![alt text](Screenshots\Opdracht3\load_balancer_ingesteld.png)
+![alt text](Screenshots/Opdracht3/load_balancer_ingesteld.png)
 
 ```bash
 nginx -t
@@ -937,7 +937,7 @@ response from server 3
 
 Test uitgevoerd:
 
-![alt text](Screenshots\Opdracht3\round_robin_nginx.png)
+![alt text](Screenshots/Opdracht3/round_robin_nginx.png)
 
 Er is ook een video `round_robin_load_balance.mp3` die de round robin aantoont.
 
