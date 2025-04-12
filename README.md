@@ -6,7 +6,7 @@ Inventaris:
 - De map Screenhots bevat bewijsvoering
 - De map Scripts bevat bash scripts
 - De map Opdrachtbeschrijving is de daadwerkelijke opdracht
-- De map `CLI commado's` bevat files met CLI commando's die gebruikt zijn, maar niet een script zijn om te runnen.
+- De map `CLI commando's` bevat files met CLI commando's die gebruikt zijn, maar niet een script zijn om te runnen.
 - De yml files zijn gebruikt voor de docker lessons.
 - Opgenomen video's staan niet op Github vanwege de grootte. Deze worden apart geleverd.
 
