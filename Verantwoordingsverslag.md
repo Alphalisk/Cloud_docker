@@ -36,6 +36,8 @@ Maak screenshots van de uitkomsten van bovenstaande en leg uit wat een Reverse p
 handeling vast in je eigen repository. Voeg een Markdown file toe waarin je een verwijzing maakt naar de gevolgde tutorial. Maak een korte 
 screen recording van de uitkomsten (werking van reverse proxy en scaling/load balancing).
 
+---
+
 ### Voorbereiding
 
 ik heb een script gemaakt voor het maken van een VM bedoeld voor docker.
@@ -138,6 +140,7 @@ sudo qm reboot 140
 echo "✅ VM $VMID is volledig klaar en geconfigureerd op $IP"
 
 ```
+---
 
 ### Opdracht 1
 
@@ -214,6 +217,8 @@ Ik heb hello world aangevraagd, en die krijg ik terug!
 ![alt text](Screenshots/Opdracht1/DockerWerkt.png)
 
 
+---
+
 #### Lesson 7 - Build Image with DockerFile and create new Container op elk docker instantie op het Proxmox cluster.
 
 Dockerfile maken:
@@ -225,7 +230,8 @@ Builden van Dockerfile:
 Runnen van de build.
 ![alt text](Screenshots/Opdracht1/Dockerrunnen.png)
 
-Les 7 afgerond!
+
+---
 
 #### Lesson 8 - Docker Compose install op alle 3 Docker installaties op het Proxmox cluster. 
 
@@ -371,6 +377,8 @@ docker-compose logs -f app
 ![alt text](Screenshots/Opdracht1/Docker_compose_werkt.png)
 
 
+---
+
 #### Lesson 9 - Voer, vanaf stap 6, geautomatiseerd de stappen uit op alle Docker omgevingen op het Proxmox cluster. Met als resultaat 3 swarms met 3 manager(op elke procmode node 1) 
 
 - Manager gemaakt op pve02
@@ -393,6 +401,8 @@ Hierbij de automaat die meteen op alle swarms uitgevoerd wordt met een service.
 - service gemaakt over de swarm
 
 ![alt text](Screenshots/Opdracht1/swarmservice.png)
+
+---
 
 #### Lesson 10 - "Basic Docker Neworking Command" Zet de commando's in een script en laat het script de commando's een voor een uitvoeren.
 
