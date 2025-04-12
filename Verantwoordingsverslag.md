@@ -801,10 +801,12 @@ Een reverse proxy ontvangt inkomend verkeer van clients en stuurt dit door naar 
 
 Traefik is een moderne reverse proxy die automatisch Docker containers detecteert en routes aanmaakt.
 
+---
+
 #### Opdracht 3.2 Load Balancing
 
 De tutorial die gevolg heb:
-https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-in-docker-container-28c445ecdeb5
+`https://medium.com/@itsvedp/optimizing-backend-performance-nginx-load-balancer-in-docker-container-28c445ecdeb5`
 
 1) Start een Ubuntu container met poortkoppeling
 `docker run -it -p 8081:80 ubuntu`
