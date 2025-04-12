@@ -230,6 +230,7 @@ Builden van Dockerfile:
 Runnen van de build.
 ![alt text](Screenshots/Opdracht1/Dockerrunnen.png)
 
+In Les 8 wordt op elke node in het cluster docker geinstalleerd.
 
 ---
 
