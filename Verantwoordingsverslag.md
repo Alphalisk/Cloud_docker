@@ -259,7 +259,7 @@ docker compose up werkt:
 
 ![alt text](Screenshots/Opdracht1/compose_up.png)
 
-- Tailgate erop zetten zodat server bereikbaar is
+- Tailscale erop zetten zodat server bereikbaar is
 
 ![alt text](Screenshots/Opdracht1/tailscalewerkend.png)
 
